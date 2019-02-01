@@ -6,6 +6,7 @@ import {fetchProtectedData} from '../actions/protected-data';
 export class Dashboard extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProtectedData());
+        setTimeout(()=>console.log('hello'), 5000)
     }
 
     render() {
