@@ -4,11 +4,13 @@ import requiresLogin from './requires-login'
 import { fetchProtectedData } from '../actions/protected-data'
 import Timeout from './timeout'
 import { clearAuth } from '../actions/auth'
+import {flipState} from '../actions/dashboardAct'
 
 export class Dashboard extends React.Component {
-  componentDidMount () {
+
+    componentDidMount () {
     this.props.dispatch(fetchProtectedData())
-    this.interval = Timeout(this.props.dispatch)
+    this.interval = Timeout(this.props.dispatch, this.state)
   }
 
   componentWillUnmount () {
@@ -16,6 +18,7 @@ export class Dashboard extends React.Component {
   }
 
   render () {
+    if(this.props.showing === false){
     return (
       <div className='dashboard'>
         <div className='dashboard-username'>
@@ -29,7 +32,17 @@ export class Dashboard extends React.Component {
         </div>
       </div>
     )
-  }
+  }else if (this.props.showing === true) {
+    return (
+        <div>
+        <h1>Still There?</h1>
+        <button 
+        onClick = {e => this.props.dispatch(flipState(e))}
+        >Yes</button>
+        </div>
+    )
+}
+} 
 }
 
 const mapStateToProps = state => {
@@ -37,7 +50,8 @@ const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
     name: `${currentUser.firstName} ${currentUser.lastName}`,
-    protectedData: state.protectedData.data
+    protectedData: state.protectedData.data,
+    showing: state.dasboard.showing
   }
 }
 

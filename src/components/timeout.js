@@ -1,10 +1,10 @@
 import { clearAuth } from '../actions/auth'
-
+import React from 'react'
+import { flipState } from '../actions/dashboardAct';
 export default function Timeout (dispatch) {
   let timer = 0
 
   window.onmousedown = () => resetTimer()
-  window.onmousemove = () => resetTimer()
   window.onclick = () => resetTimer()
   window.onkeypress = () => resetTimer()
 
@@ -14,10 +14,11 @@ export default function Timeout (dispatch) {
 
   let interval = setInterval(() => {
     console.log(timer)
-    if (timer === 3) {
-      console.log('alert')
+    if (timer === 240) {
+      dispatch(flipState())
+     
     }
-    if (timer === 5) {
+    if (timer === 300) {
       dispatch(clearAuth())
     }
     timer++
