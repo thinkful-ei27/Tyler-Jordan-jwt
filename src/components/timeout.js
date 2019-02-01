@@ -1,27 +1,25 @@
 import { clearAuth } from '../actions/auth'
 
 export default function Timeout (dispatch) {
-  let time
-  
-  window.onmousedown = resetTimer()
-  window.onmousemove = resetTimer()
-  window.onclick = console.log('fires')
-  window.onkeypress = resetTimer()
+  let timer = 0
+
+  window.onmousedown = () => resetTimer()
+  window.onmousemove = () => resetTimer()
+  window.onclick = () => resetTimer()
+  window.onkeypress = () => resetTimer()
 
   function resetTimer () {
-    clearTimeout(time)
+    timer = 0
   }
 
-  
-  
-  function myAlert () {
-    // time = setTimeout(console.log('fired'), 5000)
-    time = setTimeout(() => alert('Are you still there?') , 5000)
-  }
-
-  function logout () {
-    dispatch(clearAuth())
-  }
-
-  
+  setInterval(() => {
+    console.log(timer)
+    if (timer === 3) {
+      console.log('alert')
+    }
+    if (timer === 5) {
+      dispatch(clearAuth())
+    }
+    timer++
+  }, 1000)
 }

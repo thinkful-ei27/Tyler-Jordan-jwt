@@ -6,15 +6,21 @@ import Timeout from './timeout'
 import { clearAuth } from '../actions/auth'
 
 export class Dashboard extends React.Component {
-    componentDidMount () {
+  componentDidMount () {
     this.props.dispatch(fetchProtectedData())
-    setInterval(()=> console.log('hi'), 3000)
-    setInterval(() =>this.props.dispatch(clearAuth()), 20000)
+    Timeout(this.props.dispatch)
+    //   clearInterval()
+    //   this.startTimer(5000)
+    //   window.onclick = () => this.startTimer(5000)
+    //   window.onkeypress = () => this.startTimer(5000)
+    // }
+    // startTimer (timer) {
+    //   clearInterval(timer)
+    //   setInterval(() => console.log('hi'), timer)
   }
 
-  componentWillUnmount(){
-      clearInterval()
-  }
+  componentWillUnmount () {}
+  // this.props.dispatch(clearAuth())
   render () {
     return (
       <div className='dashboard'>
