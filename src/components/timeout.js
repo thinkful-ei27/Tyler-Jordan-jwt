@@ -19,7 +19,9 @@ export default function Timeout (dispatch) {
      
     }
     if (timer === 300) {
+      dispatch(flipState())
       dispatch(clearAuth())
+
     }
     timer++
   }, 1000)
