@@ -12,7 +12,7 @@ export default function Timeout (dispatch) {
     timer = 0
   }
 
-  setInterval(() => {
+  let interval = setInterval(() => {
     console.log(timer)
     if (timer === 3) {
       console.log('alert')
@@ -22,4 +22,6 @@ export default function Timeout (dispatch) {
     }
     timer++
   }, 1000)
+
+  return interval
 }
