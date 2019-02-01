@@ -3,13 +3,18 @@ import { connect } from 'react-redux'
 import requiresLogin from './requires-login'
 import { fetchProtectedData } from '../actions/protected-data'
 import Timeout from './timeout'
+import { clearAuth } from '../actions/auth'
 
 export class Dashboard extends React.Component {
-  componentDidMount () {
+    componentDidMount () {
     this.props.dispatch(fetchProtectedData())
-    setInterval(() => Timeout(this.props.dispatch), 3000)
+    setInterval(()=> console.log('hi'), 3000)
+    setInterval(() =>this.props.dispatch(clearAuth()), 20000)
   }
 
+  componentWillUnmount(){
+      clearInterval()
+  }
   render () {
     return (
       <div className='dashboard'>
